@@ -22,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_complete_gas'])) 
 
     if ($product) {
         $price = ($size === '6kg') ? $product['price_6kg'] : $product['price_13kg'];
-        $image = (!empty($product['image']) && file_exists("images/{$product['image']}")) ? $product['image'] : 'default.png';
-
+        $image = !empty($product['image']) ? $product['image'] : 'default.png';
         $item = [
             'id' => $product['id'],
             'name' => $product['name'],
@@ -59,17 +58,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_custom_gas'])) {
     }
 }
 
-// Remove item
+// Remove item from cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_index'])) {
     $index = (int)$_POST['remove_index'];
     if (isset($_SESSION['complete_cart'][$index])) {
         unset($_SESSION['complete_cart'][$index]);
+        // Re-index array after removal
         $_SESSION['complete_cart'] = array_values($_SESSION['complete_cart']);
     }
     $redirect = true;
 }
 
 if ($redirect) {
+    // Debug redirect target (comment out in production)
+    // error_log('Redirecting to: ' . $_SERVER['PHP_SELF']);
+
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
@@ -80,6 +83,7 @@ if (isset($_SESSION['success_msg'])) {
     unset($_SESSION['success_msg']);
 }
 
+// Fetch products from DB
 $products = mysqli_query($conn, "SELECT * FROM complete_gas_products");
 if (!$products) {
     die("Error fetching products: " . mysqli_error($conn));
@@ -92,6 +96,7 @@ if (!$products) {
     <meta charset="UTF-8">
     <title>Complete Gas Cylinders - Joy Smart Gas</title>
     <style>
+        /* Styles unchanged - no need to modify */
         * { box-sizing: border-box; }
         body {
             font-family: Arial, sans-serif;
@@ -224,10 +229,9 @@ if (!$products) {
     <?php else: ?>
         <?php foreach ($_SESSION['complete_cart'] as $index => $item): ?>
             <div class="cart-item">
-                <img src="images/<?= htmlspecialchars($item['image']) ?>" alt="Product">
+                <img src="/images/<?= htmlspecialchars($item['image']) ?>" alt="Product Image" onerror="this.onerror=null;this.src='/images/default.png';">
                 <strong><?= htmlspecialchars($item['name']) ?></strong>
-                <small><?= htmlspecialchars($item['size']) ?> - 
-                       Ksh <?= number_format($item['price']) ?></small>
+                <small><?= htmlspecialchars($item['size']) ?> - Ksh <?= number_format($item['price']) ?></small>
                 <form method="POST" style="margin-top:5px;">
                     <input type="hidden" name="remove_index" value="<?= $index ?>">
                     <button type="submit" class="btn-remove">Remove</button>
@@ -235,9 +239,7 @@ if (!$products) {
             </div>
         <?php endforeach; ?>
         <hr>
-        <strong>Total: Ksh 
-            <?= number_format(array_sum(array_column($_SESSION['complete_cart'], 'price'))) ?>
-        </strong>
+        <strong>Total: Ksh <?= number_format(array_sum(array_column($_SESSION['complete_cart'], 'price'))) ?></strong>
         <br><br>
         <a href="select_location.php?type=complete" class="btn-order">Proceed to Order</a>
     <?php endif; ?>
@@ -253,11 +255,8 @@ if (!$products) {
 
     <div class="products">
         <?php while ($row = mysqli_fetch_assoc($products)): ?>
-            <?php
-            $product_image = (!empty($row['image']) && file_exists("images/{$row['image']}")) ? $row['image'] : 'default.png';
-            ?>
             <div class="product">
-                <img src="images/<?= htmlspecialchars($product_image) ?>" alt="<?= htmlspecialchars($row['name']) ?>">
+                <img src="/images/<?= htmlspecialchars($row['image'] ?: 'default.png') ?>" alt="<?= htmlspecialchars($row['name']) ?>" onerror="this.onerror=null;this.src='/images/default.png';">
                 <h4><?= htmlspecialchars($row['name']) ?></h4>
                 <p>6kg - Ksh <?= number_format($row['price_6kg']) ?></p>
                 <p>13kg - Ksh <?= number_format($row['price_13kg']) ?></p>
@@ -282,8 +281,8 @@ if (!$products) {
                 <input type="text" name="custom_name" placeholder="Type gas name..." required>
                 <select name="custom_size" required>
                     <option value="">Select Size</option>
-                    <option value="6kg">6kg - Ksh 4,500</option>
-                    <option value="13kg">13kg - Ksh 8,500</option>
+                    <option value="6kg">6kg - Ksh 3,700</option>
+                    <option value="13kg">13kg - Ksh 7,500</option>
                 </select>
                 <button type="submit" class="btn">Add to cart</button>
             </form>
