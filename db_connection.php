@@ -1,8 +1,8 @@
 <?php
-$host = 'containers-abcxyz.up.railway.app'; // Replace this with the actual value of RAILWAY_PRIVATE_DOMAIN
+$host = 'mysql.railway.internal';
 $port = 3306;
 $username = 'root';
-$password = 'kcvXfefWZmWlTSwRZWmOkHCakVdwTAiu';
+$password = 'kcvXfefWZmWlTSwRZWmOkHCakVdwTAiu'; // Your Railway password
 $database = 'railway';
 
 $conn = new mysqli($host, $username, $password, $database, $port);
