@@ -1,0 +1,7 @@
+{
+    "name": "joymart/gas-project",
+    "description": "A project for sending emails with PHPMailer",
+    "require": {
+        "phpmailer/phpmailer": "^6.10"
+    }
+}

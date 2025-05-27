@@ -1,0 +1,201 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+/* Hero Section */
+.hero {
+    background: url('images/hero-bg.jpg') no-repeat center center/cover;
+    padding: 5rem 0;
+    color: #fff;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.hero .btn {
+    padding: 10px 25px;
+    background-color: #e6a400;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.hero .btn:hover {
+    background-color: #d48800;
+}
+
+/* Shop Section */
+.shop-section .shop-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 2rem;
+}
+
+/* About Section */
+.about {
+    background-color: #fff;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.about p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.card {
+    background-color: #f9f9f9;
+    width: 23%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Call to Action Section */
+.cta {
+    background-color: #e6a400;
+    color: #fff;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta .btn {
+    padding: 12px 30px;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.cta .btn:hover {
+    background-color: #ffd633;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+footer p {
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    header .header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 80%;
+        margin-bottom: 2rem;
+    }
+
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cta h2 {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cta h2 {
+        font-size: 1.8rem;
+    }
+}
