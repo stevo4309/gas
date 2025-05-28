@@ -167,8 +167,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label>Payment Method:</label>
             <select name="payment_method" required>
                 <option value="">-- Select Payment Method --</option>
-                <option value="cash_on_delivery" <?= ($payment_method == 'cash_on_delivery') ? 'selected' : '' ?>>Cash on Delivery</option>
-                <option value="mpesa" <?= ($payment_method == 'mpesa') ? 'selected' : '' ?>>MPesa</option>
+                <option value="Cash" <?= ($payment_method == 'Cash') ? 'selected' : '' ?>>Cash on Delivery</option>
+                <option value="MPesa" <?= ($payment_method == 'MPesa') ? 'selected' : '' ?>>MPesa</option>
+                <option value="Card" <?= ($payment_method == 'Card') ? 'selected' : '' ?>>Card</option>
             </select>
 
             <button type="submit">Confirm Order</button>
