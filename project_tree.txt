@@ -1,0 +1,374 @@
+Folder PATH listing
+Volume serial number is 2272-82DE
+C:.
+|   about.php
+|   accessories.php
+|   chat_client.php
+|   complete_gas.php
+|   composer
+|   composer.bat
+|   composer.json
+|   composer.lock
+|   composer.phar
+|   contact.php
+|   countrywide_order_form.php
+|   db_connection.php
+|   dir
+|   Dockerfile
+|   git
+|   index.php
+|   order.php
+|   order_details.php
+|   order_selection.php
+|   process_order.php
+|   products.php
+|   project_tree.txt
+|   refilling.php
+|   save_message.php
+|   select_location.php
+|   send_email.php
+|   test_autoload.php
+|   
++---Admin
+|   |   Admin_login.php
+|   |   admin_messages.php
+|   |   admin_template.php
+|   |   dashboard.php
+|   |   edit_accessory.php
+|   |   edit_product.php
+|   |   index.php
+|   |   logout.php
+|   |   manage_accessories.php
+|   |   manage_complete_gas.php
+|   |   manage_refill.php
+|   |   orders.php
+|   |   sidebar.php
+|   |   update_price.phP
+|   |   
+|   +---assets
+|   |       styles.css
+|   |       
+|   \---images
+|           46a2e1fcebffe744a2c0c9a11a2d2d67.jpg
+|           burner.jpg
+|           email.jpg
+|           gas-hero.jpg
+|           gas_leak_detector.jpg
+|           gas_regulator.jpg
+|           harshigas.jpg
+|           hero-bg.jpg
+|           keygas.jpeg
+|           location.jpg
+|           oilibyagas.jpeg
+|           phone.jpg
+|           seagas.jpeg
+|           super gas.jpg
+|           total.jpg
+|           whatsapp.jpg
+|           
++---css
+|       styles.css
+|       
++---images
+|   |   13kg regulator.jpg
+|   |   13kg.jpg
+|   |   46a2e1fcebffe744a2c0c9a11a2d2d67.jpg
+|   |   afrigas.jpeg
+|   |   afrigas.jpg
+|   |   burner.jpg
+|   |   egas.jpeg
+|   |   email.jpg
+|   |   futuregas.jpeg
+|   |   gas-hero.jpg
+|   |   gas_leak_detector.jpg
+|   |   gas_lighter.jpg
+|   |   grills.jpg
+|   |   gun lighter.jpg
+|   |   harshigas.jpeg
+|   |   harshigas.jpg
+|   |   hass gas.jpg
+|   |   hassgas.jpeg
+|   |   hero-bg.jpg
+|   |   high pressure.jpg
+|   |   hose.jpg
+|   |   hr burner.jpg
+|   |   kgas.jpeg
+|   |   lakegas.jpeg
+|   |   location.jpg
+|   |   maxgas.jpeg
+|   |   mengas.jpg
+|   |   mpishi.jpg
+|   |   mpishigas.jpeg
+|   |   nurugas.jpeg
+|   |   oilibyagas.jpeg
+|   |   phone.jpg
+|   |   pipes.jpg
+|   |   plastic clips.jpg
+|   |   powergas.jpeg
+|   |   progas.jpeg
+|   |   safegas.jpg
+|   |   seagas.jpeg
+|   |   shop-image.jpg
+|   |   spring-band- clamp.webp
+|   |   super gas.jpg
+|   |   supergas.jpeg
+|   |   technogas.jpeg
+|   |   topgas.jpeg
+|   |   total.jpg
+|   |   totalgas.jpeg
+|   |   wajiko.jpeg
+|   |   whatsapp.jpg
+|   |   Worm Gear Hose Clamp.jpg
+|   |   
+|   \---about
+|           contact.jpg
+|           safety.jpg
+|           what-we-offer.jpg
+|           who-we-are.jpg
+|           why-choose-us.jpg
+|           
+\---vendor
+    |   autoload.php
+    |   
+    +---composer
+    |       autoload_classmap.php
+    |       autoload_namespaces.php
+    |       autoload_psr4.php
+    |       autoload_real.php
+    |       autoload_static.php
+    |       ClassLoader.php
+    |       installed.json
+    |       installed.php
+    |       InstalledVersions.php
+    |       LICENSE
+    |       platform_check.php
+    |       
+    \---phpmailer
+        \---phpmailer
+            |   .codecov.yml
+            |   .editorconfig
+            |   .gitattributes
+            |   .gitignore
+            |   changelog.md
+            |   COMMITMENT
+            |   composer.json
+            |   get_oauth_token.php
+            |   LICENSE
+            |   phpcs.xml.dist
+            |   phpdoc.dist.xml
+            |   phpunit.xml.dist
+            |   README.md
+            |   SECURITY.md
+            |   SMTPUTF8.md
+            |   UPGRADING.md
+            |   VERSION
+            |   
+            +---.github
+            |   |   dependabot.yml
+            |   |   FUNDING.yml
+            |   |   
+            |   +---actions
+            |   |   \---build-docs
+            |   |           Dockerfile
+            |   |           entrypoint.sh
+            |   |           
+            |   +---ISSUE_TEMPLATE
+            |   |       bug_report.md
+            |   |       
+            |   \---workflows
+            |           docs.yaml
+            |           scorecards.yml
+            |           tests.yml
+            |           
+            +---.phan
+            |       config.php
+            |       
+            +---docs
+            |       README.md
+            |       
+            +---examples
+            |   |   azure_xoauth2.phps
+            |   |   callback.phps
+            |   |   contactform-ajax.phps
+            |   |   contactform.phps
+            |   |   contents.html
+            |   |   contentsutf8.html
+            |   |   DKIM_gen_keys.phps
+            |   |   DKIM_sign.phps
+            |   |   exceptions.phps
+            |   |   extending.phps
+            |   |   gmail.phps
+            |   |   gmail_xoauth.phps
+            |   |   mail.phps
+            |   |   mailing_list.phps
+            |   |   pop_before_smtp.phps
+            |   |   README.md
+            |   |   sendmail.phps
+            |   |   sendoauth2.phps
+            |   |   send_file_upload.phps
+            |   |   send_multiple_file_upload.phps
+            |   |   simple_contact_form.phps
+            |   |   smime_signed_mail.phps
+            |   |   smtp.phps
+            |   |   smtp_check.phps
+            |   |   smtp_low_memory.phps
+            |   |   smtp_no_auth.phps
+            |   |   ssl_options.phps
+            |   |   
+            |   \---images
+            |           PHPMailer card logo.afdesign
+            |           PHPMailer card logo.png
+            |           PHPMailer card logo.svg
+            |           phpmailer.png
+            |           phpmailer_mini.png
+            |           
+            +---language
+            |       phpmailer.lang-af.php
+            |       phpmailer.lang-ar.php
+            |       phpmailer.lang-as.php
+            |       phpmailer.lang-az.php
+            |       phpmailer.lang-ba.php
+            |       phpmailer.lang-be.php
+            |       phpmailer.lang-bg.php
+            |       phpmailer.lang-bn.php
+            |       phpmailer.lang-ca.php
+            |       phpmailer.lang-cs.php
+            |       phpmailer.lang-da.php
+            |       phpmailer.lang-de.php
+            |       phpmailer.lang-el.php
+            |       phpmailer.lang-eo.php
+            |       phpmailer.lang-es.php
+            |       phpmailer.lang-et.php
+            |       phpmailer.lang-fa.php
+            |       phpmailer.lang-fi.php
+            |       phpmailer.lang-fo.php
+            |       phpmailer.lang-fr.php
+            |       phpmailer.lang-gl.php
+            |       phpmailer.lang-he.php
+            |       phpmailer.lang-hi.php
+            |       phpmailer.lang-hr.php
+            |       phpmailer.lang-hu.php
+            |       phpmailer.lang-hy.php
+            |       phpmailer.lang-id.php
+            |       phpmailer.lang-it.php
+            |       phpmailer.lang-ja.php
+            |       phpmailer.lang-ka.php
+            |       phpmailer.lang-ko.php
+            |       phpmailer.lang-ku.php
+            |       phpmailer.lang-lt.php
+            |       phpmailer.lang-lv.php
+            |       phpmailer.lang-mg.php
+            |       phpmailer.lang-mn.php
+            |       phpmailer.lang-ms.php
+            |       phpmailer.lang-nb.php
+            |       phpmailer.lang-nl.php
+            |       phpmailer.lang-pl.php
+            |       phpmailer.lang-pt.php
+            |       phpmailer.lang-pt_br.php
+            |       phpmailer.lang-ro.php
+            |       phpmailer.lang-ru.php
+            |       phpmailer.lang-si.php
+            |       phpmailer.lang-sk.php
+            |       phpmailer.lang-sl.php
+            |       phpmailer.lang-sr.php
+            |       phpmailer.lang-sr_latn.php
+            |       phpmailer.lang-sv.php
+            |       phpmailer.lang-tl.php
+            |       phpmailer.lang-tr.php
+            |       phpmailer.lang-uk.php
+            |       phpmailer.lang-ur.php
+            |       phpmailer.lang-vi.php
+            |       phpmailer.lang-zh.php
+            |       phpmailer.lang-zh_cn.php
+            |       
+            +---src
+            |       DSNConfigurator.php
+            |       Exception.php
+            |       OAuth.php
+            |       OAuthTokenProvider.php
+            |       PHPMailer.php
+            |       POP3.php
+            |       SMTP.php
+            |       
+            \---test
+                |   DebugLogTestListener.php
+                |   fakepopserver.sh
+                |   fakesendmail.sh
+                |   PreSendTestCase.php
+                |   runfakepopserver.sh
+                |   SendTestCase.php
+                |   testbootstrap-dist.php
+                |   TestCase.php
+                |   validators.php
+                |   
+                +---Fixtures
+                |   +---FileIsAccessibleTest
+                |   |       accessible.txt
+                |   |       inaccessible.txt
+                |   |       
+                |   \---LocalizationTest
+                |           phpmailer.lang-fr.php
+                |           phpmailer.lang-nl.php
+                |           phpmailer.lang-xa_scri_cc.php
+                |           phpmailer.lang-xb_scri.php
+                |           phpmailer.lang-xc_cc.php
+                |           phpmailer.lang-xd_cc.php
+                |           phpmailer.lang-xd_scri.php
+                |           phpmailer.lang-xe.php
+                |           phpmailer.lang-xx.php
+                |           phpmailer.lang-yy.php
+                |           phpmailer.lang-zz.php
+                |           
+                +---Language
+                |       TranslationCompletenessTest.php
+                |       
+                +---OAuth
+                |       OAuthTest.php
+                |       
+                +---PHPMailer
+                |       AddEmbeddedImageTest.php
+                |       AddrFormatTest.php
+                |       AddStringAttachmentTest.php
+                |       AddStringEmbeddedImageTest.php
+                |       AuthCRAMMD5Test.php
+                |       CustomHeaderTest.php
+                |       DKIMTest.php
+                |       DKIMWithoutExceptionsTest.php
+                |       DSNConfiguratorTest.php
+                |       EncodeQTest.php
+                |       EncodeStringTest.php
+                |       FileIsAccessibleTest.php
+                |       FilenameToTypeTest.php
+                |       GenerateIdTest.php
+                |       GetLastMessageIDTest.php
+                |       HasLineLongerThanMaxTest.php
+                |       Html2TextTest.php
+                |       ICalTest.php
+                |       IsPermittedPathTest.php
+                |       IsValidHostTest.php
+                |       LocalizationTest.php
+                |       MailTransportTest.php
+                |       MbPathinfoTest.php
+                |       MimeTypesTest.php
+                |       NormalizeBreaksTest.php
+                |       ParseAddressesTest.php
+                |       PHPMailerTest.php
+                |       PunyencodeAddressTest.php
+                |       QuotedStringTest.php
+                |       ReplyToGetSetClearTest.php
+                |       SetErrorTest.php
+                |       SetFromTest.php
+                |       SetTest.php
+                |       SetWordWrapTest.php
+                |       Utf8CharBoundaryTest.php
+                |       ValidateAddressCustomValidatorTest.php
+                |       ValidateAddressTest.php
+                |       WrapTextTest.php
+                |       XMailerTest.php
+                |       
+                +---POP3
+                |       PopBeforeSmtpTest.php
+                |       
+                \---Security
+                        DenialOfServiceVectorsTest.php
+                        

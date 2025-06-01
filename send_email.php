@@ -1,11 +1,13 @@
 <?php
-var_dump(file_exists(__DIR__ . '/vendor/autoload.php'));
+require __DIR__ . '/vendor/autoload.php';  // <-- This loads PHPMailer classes automatically
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function sendOrderEmail($to, $subject, $body) {
-    $mail = new PHPMailer(true);
+// Now you can instantiate PHPMailer
+$mail = new PHPMailer(true);
+{
+
 
     try {
         $mail->isSMTP();
