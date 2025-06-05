@@ -44,7 +44,7 @@ $user_id = $_SESSION['user_id'];
 
     .logo-name span {
         display: inline-block;
-        font-size: 48px;
+        font-size: 36px;
         color: #051d5f;
         -webkit-text-stroke: 1.5px white;
         font-weight: bold;
@@ -53,30 +53,43 @@ $user_id = $_SESSION['user_id'];
     nav ul {
         list-style: none;
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
         padding: 0;
-        margin-top: 10px;
-        gap: 10px;
+        margin: 0;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 
     nav ul li {
-        margin: 0;
+        margin: 0 10px;
     }
 
     nav ul li a {
         color: #fff;
         text-decoration: none;
         font-weight: bold;
-        transition: 0.3s;
-        padding: 5px 10px;
-        border-radius: 5px;
+        padding: 10px 15px;
+        display: inline-block;
+        transition: background-color 0.3s;
     }
 
     nav ul li a:hover {
         color: #333;
         background: #fff;
+        border-radius: 5px;
+    }
+
+    @media (max-width: 600px) {
+        .logo-name span {
+            font-size: 28px;
+        }
+
+        nav ul li a {
+            padding: 8px 10px;
+            font-size: 14px;
+        }
     }
 
     /* Hero Section */
@@ -87,12 +100,12 @@ $user_id = $_SESSION['user_id'];
     }
 
     .hero-content h2 {
-        font-size: 28px;
+        font-size: 32px;
         margin-bottom: 10px;
     }
 
     .hero-content p {
-        font-size: 16px;
+        font-size: 18px;
         margin-bottom: 20px;
     }
 
@@ -133,15 +146,15 @@ $user_id = $_SESSION['user_id'];
 
     .about .container h2 {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     .cards-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
-        padding: 10px 0;
-        overflow: visible;
+        max-width: 1000px;
+        margin: auto;
     }
 
     .card {
@@ -154,7 +167,7 @@ $user_id = $_SESSION['user_id'];
     }
 
     .card img {
-        width: 100%;
+        max-width: 100%;
         height: auto;
         border-radius: 4px;
         margin-bottom: 10px;
@@ -186,18 +199,6 @@ $user_id = $_SESSION['user_id'];
         padding: 20px;
         font-size: 14px;
     }
-
-    @media (max-width: 600px) {
-        .logo-name span {
-            font-size: 32px;
-        }
-        .hero-content h2 {
-            font-size: 24px;
-        }
-        .hero-content p {
-            font-size: 14px;
-        }
-    }
   </style>
 </head>
 <body>
@@ -227,7 +228,7 @@ $user_id = $_SESSION['user_id'];
 <section class="hero">
     <div class="hero-content">
         <h2>Fast & Reliable Cooking Gas Delivery</h2>
-        <p>Order now and enjoy fast, free delivery within Ruiru! We also sell complete gas cylinder and delivery across Kenya.</p>
+        <p>Order now and enjoy fast, free delivery within Ruiru! We also sell complete gas cylinders and deliver across Kenya.</p>
         <a href="products.php" class="btn primary-btn">Order Now</a>
     </div>
 </section>
@@ -241,7 +242,7 @@ $user_id = $_SESSION['user_id'];
 <section class="about">
     <div class="container">
         <h2>Why Choose Joy Smart Gas?</h2>
-        <p>We are committed to providing <strong>safe, fast, and affordable gas delivery</strong> to households and businesses across Ruiru.</p>
+        <p style="text-align:center;">We are committed to providing <strong>safe, fast, and affordable gas delivery</strong> to households and businesses across Ruiru.</p>
         
         <div class="cards-container">
             <div class="card">
@@ -271,7 +272,7 @@ $user_id = $_SESSION['user_id'];
 <section class="cta">
     <div class="container">
         <h2>Need a Gas Refill?</h2>
-        <p>Order now and enjoy fast, free delivery within Ruiru! We also sell complete gas cylinder and delivery across Kenya.</p>
+        <p>Order now and enjoy fast, free delivery within Ruiru! We also sell complete gas cylinders and deliver across Kenya.</p>
         <a href="contact.php" class="btn secondary-btn">Contact Us</a>
     </div>
 </section>
