@@ -1,35 +1,35 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';  // <-- This loads PHPMailer classes automatically
+require __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Now you can instantiate PHPMailer
-$mail = new PHPMailer(true);
-{
-
+function sendOrderEmail($to, $subject, $body) {
+    $mail = new PHPMailer(true);
 
     try {
+        //Server settings
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'joysmartgas@gmail.com';
-        $mail->Password = 'ouqf enfe hgoq btlk';
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'joysmartgas@gmail.com'; // Your Gmail address
+        $mail->Password   = 'ouqf enfe hgoq btlk';   // Your app password (not regular Gmail password)
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = 465;
 
+        //Recipients
         $mail->setFrom('joysmartgas@gmail.com', 'Joy Smart Gas');
         $mail->addAddress($to);
 
+        //Content
         $mail->isHTML(false);
         $mail->Subject = $subject;
-        $mail->Body = $body;
+        $mail->Body    = $body;
 
         $mail->send();
-        echo "Message sent successfully!";
         return true;
     } catch (Exception $e) {
-        echo "Mailer Error: " . $mail->ErrorInfo;
+        error_log("Mailer Error: " . $mail->ErrorInfo);
         return false;
     }
 }
