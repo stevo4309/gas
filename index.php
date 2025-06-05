@@ -18,12 +18,16 @@ $user_id = $_SESSION['user_id'];
   <meta name="keywords" content="Gas delivery, Cooking gas, Nairobi gas, Free gas delivery">
   <link rel="stylesheet" href="css/styles.css?v=<?php echo time(); ?>">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
 
   <style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+    }
+
     /* Header */
     header {
-        background:rgb(236, 13, 13);
+        background: rgb(236, 13, 13);
         color: #fff;
         padding: 30px 0;
     }
@@ -54,10 +58,11 @@ $user_id = $_SESSION['user_id'];
         align-items: center;
         padding: 0;
         margin-top: 10px;
+        gap: 10px;
     }
 
     nav ul li {
-        margin: 0 10px;
+        margin: 0;
     }
 
     nav ul li a {
@@ -65,13 +70,13 @@ $user_id = $_SESSION['user_id'];
         text-decoration: none;
         font-weight: bold;
         transition: 0.3s;
+        padding: 5px 10px;
+        border-radius: 5px;
     }
 
     nav ul li a:hover {
         color: #333;
         background: #fff;
-        padding: 5px 10px;
-        border-radius: 5px;
     }
 
     /* Hero Section */
@@ -82,12 +87,12 @@ $user_id = $_SESSION['user_id'];
     }
 
     .hero-content h2 {
-        font-size: 32px;
+        font-size: 28px;
         margin-bottom: 10px;
     }
 
     .hero-content p {
-        font-size: 18px;
+        font-size: 16px;
         margin-bottom: 20px;
     }
 
@@ -128,20 +133,18 @@ $user_id = $_SESSION['user_id'];
 
     .about .container h2 {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
 
     .cards-container {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: 20px;
-        overflow-x: auto;
+        padding: 10px 0;
+        overflow: visible;
     }
 
     .card {
-        flex: 0 0 auto;
-        width: 250px;
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -151,7 +154,7 @@ $user_id = $_SESSION['user_id'];
     }
 
     .card img {
-        max-width: 100%;
+        width: 100%;
         height: auto;
         border-radius: 4px;
         margin-bottom: 10px;
@@ -182,6 +185,18 @@ $user_id = $_SESSION['user_id'];
         text-align: center;
         padding: 20px;
         font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+        .logo-name span {
+            font-size: 32px;
+        }
+        .hero-content h2 {
+            font-size: 24px;
+        }
+        .hero-content p {
+            font-size: 14px;
+        }
     }
   </style>
 </head>
