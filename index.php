@@ -19,217 +19,111 @@ $user_id = $_SESSION['user_id'];
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+/* Reset basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-    }
+/* Modern header layout */
+header {
+  background-color: #ec0d0d;
+  color: white;
+  padding: 16px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 
-    header {
-      background: rgb(236, 13, 13);
-      color: #fff;
-    }
+.modern-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+}
 
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-      /* Removed flex-wrap: wrap to keep single row always */
-    }
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  -webkit-text-stroke: 0.8px #051d5f;
+  white-space: nowrap;
+}
 
-    .logo-name {
-      font-size: 28px;
-      font-weight: bold;
-      color: #051d5f;
-      -webkit-text-stroke: 1.2px white;
-      flex: 1 1 200px;
-      white-space: nowrap;
-    }
+.nav-menu {
+  display: flex;
+  gap: 24px;
+}
 
-    nav {
-      flex: 1 1 300px;
-    }
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+.nav-menu a:hover {
+  background-color: white;
+  color: #ec0d0d;
+}
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-      justify-content: flex-end;
-      margin: 0;
-      padding: 0;
-      overflow-x: auto; /* allow horizontal scroll on very small screens */
-      white-space: nowrap;
-    }
+/* Mobile menu */
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+}
 
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 18px;
-      padding: 8px 12px;
-      border-radius: 4px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      display: inline-block;
-    }
+#menu-toggle {
+  display: none;
+}
 
-    nav ul li a:hover {
-      background-color: white;
-      color: #ec0d0d;
-      box-shadow: 0 4px 8px rgba(236, 13, 13, 0.4);
-    }
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    color: white;
+  }
+  .nav-menu {
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: #ec0d0d;
+    width: 200px;
+    display: none;
+    padding: 10px 0;
+    border-radius: 8px;
+  }
+  #menu-toggle:checked + .menu-icon + .nav-menu {
+    display: flex;
+  }
+}
 
-    .hero {
-      background-color: #f5f5f5;
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .hero h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .btn {
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 4px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .primary-btn {
-      background-color: #007bff;
-      color: white;
-    }
-
-    .primary-btn:hover {
-      background-color: #0056b3;
-    }
-
-    .shop-section .container {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .shop-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-    }
-
-    .about {
-      padding: 60px 20px;
-      background-color: #f8f8f8;
-    }
-
-    .about h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    /* Cards container: use flexbox for 2 per row on mobile/tablets */
-    .cards-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      flex: 1 1 calc(25% - 20px); /* default 4 cards per row on large screens */
-      max-width: calc(25% - 20px);
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 4px;
-      margin-bottom: 10px;
-    }
-
-    /* Tablet and mobile: 2 cards per row */
-    @media (max-width: 992px) {
-      .card {
-        flex: 1 1 calc(50% - 20px);
-        max-width: calc(50% - 20px);
-      }
-    }
-
-    /* Small phones: cards stack full width */
-    @media (max-width: 480px) {
-      .card {
-        flex: 1 1 100%;
-        max-width: 100%;
-      }
-    }
-
-    .cta {
-      background-color: #051d5f;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .cta .btn {
-      background-color: white;
-      color: #051d5f;
-      margin-top: 15px;
-    }
-
-    .cta .btn:hover {
-      background-color: #ddd;
-    }
-
-    footer {
-      background-color: #222;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="header-container">
-    <h1 class="logo-name">
-      <span>J</span><span>O</span><span>Y</span>
-      <span>&nbsp;</span>
-      <span>S</span><span>M</span><span>A</span><span>R</span><span>T</span>
-      <span>&nbsp;</span>
-      <span>G</span><span>A</span><span>S</span>
-    </h1>
-    <nav>
-      <ul>
-        <li><a href="index.php">Home</a></li>
-        <li><a href="products.php">Products</a></li>
-        <li><a href="contact.php">Contact</a></li>
-        <li><a href="about.php">About</a></li>
-      </ul>
+  <div class="modern-header">
+    <div class="logo">JOYSMART GAS</div>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+    <nav class="nav-menu">
+      <a href="index.php">Home</a>
+      <a href="products.php">Products</a>
+      <a href="contact.php">Contact</a>
+      <a href="about.php">About</a>
     </nav>
   </div>
 </header>
+
 
 <section class="hero">
   <div class="hero-content">
