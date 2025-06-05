@@ -8,16 +8,16 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Install composer binary from official composer image
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy only composer files first for better caching
+# Copy composer files first to leverage cache
 COPY composer.json composer.lock ./
 
-# Run composer install to install dependencies in vendor/
+# Run composer install
 RUN composer install --no-dev --optimize-autoloader
 
-# Now copy the rest of your app files
+# Now copy the rest of your application
 COPY . .
 
 EXPOSE 80
