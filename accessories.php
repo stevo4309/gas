@@ -209,34 +209,69 @@ mysqli_close($conn);
             font-weight: bold;
             text-decoration: none;
         }
+@media (max-width: 768px) {
+    body {
+        padding-right: 0;
+    }
 
-        @media (max-width: 768px) {
-            body {
-                padding-right: 0;
-            }
+    .cart-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 15px;
+    }
 
-            .cart-sidebar {
-                transform: translateX(100%);
-                position: fixed;
-                top: 0;
-                width: 100%;
-                height: auto;
-                border-left: none;
-                border-top: 3px solid #f68b1e;
-            }
+    .container {
+        margin: 10px;
+        padding: 20px;
+    }
 
-            .cart-sidebar.show {
-                transform: translateX(0);
-            }
+    /* Change here: 2 columns on mobile */
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
 
-            .cart-toggle {
-                display: block;
-            }
+    .product img {
+        width: 80px;
+    }
 
-            .btn-order {
-                width: 100%;
-            }
-        }
+    .btn, .btn-order, .btn-remove {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .cart-sidebar h3 {
+        font-size: 20px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .cart-item img {
+        width: 30px;
+        margin-right: 10px;
+    }
+
+    .cart-item small {
+        font-size: 13px;
+    }
+
+    .cart-item form {
+        margin-top: 5px;
+        width: 100%;
+        text-align: right;
+    }
+}
+
     </style>
 </head>
 <body>
