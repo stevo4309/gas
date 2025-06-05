@@ -1,7 +1,18 @@
 {
-    "name": "joymart/gas-project",
-    "description": "A project for sending emails with PHPMailer",
+    "name": "splutz/gas",
+    "description": "Gas ordering web system with PHPMailer integration",
     "require": {
         "phpmailer/phpmailer": "^6.10"
-    }
+    },
+    "autoload": {
+        "psr-4": {
+            "Splutz\\Gas\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stephen kinyua",
+            "email": "stevo4309@gmail.com"
+        }
+    ]
 }
