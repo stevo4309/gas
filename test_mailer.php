@@ -1,31 +1,29 @@
 <?php
-echo "Step 1: Starting test...<br>";
+require __DIR__ . '/vendor/autoload.php';
 
-// STEP 2: Check if Composer autoload file exists
-$autoloadPath = __DIR__ . '/vendor/autoload.php';
-if (!file_exists($autoloadPath)) {
-    die("❌ ERROR: Composer autoload file not found at: $autoloadPath<br>");
-}
-
-require $autoloadPath;
-echo "✅ Step 2: Autoload file loaded<br>";
-
-// STEP 3: Import PHPMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-echo "✅ Step 3: Namespace imported<br>";
 
-// STEP 4: Check if PHPMailer class exists
-if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
-    die("❌ ERROR: PHPMailer class not found. Make sure it's installed by Composer.<br>");
-}
+$mail = new PHPMailer(true);
 
-echo "✅ Step 4: PHPMailer class exists<br>";
-
-// STEP 5: Try creating an instance
 try {
-    $mail = new PHPMailer(true);
-    echo "✅ Step 5: PHPMailer instance created successfully<br>";
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'joysmartgas@gmail.com'; // replace with your email
+    $mail->Password = 'ouqf enfe hgoq btlk';    // replace with your Gmail app password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port = 465;
+
+    $mail->setFrom('joysmartgas@gmail.com', 'Test Sender');
+    $mail->addAddress('kinyuastephenkahiga@gmail.com'); // replace with your recipient email
+
+    $mail->isHTML(false);
+    $mail->Subject = 'Test email from PHPMailer';
+    $mail->Body = 'This is a test email sent via PHPMailer!';
+
+    $mail->send();
+    echo "Email sent successfully!";
 } catch (Exception $e) {
-    echo "❌ ERROR: Failed to create PHPMailer instance: " . $e->getMessage() . "<br>";
+    echo "Mailer Error: " . $mail->ErrorInfo;
 }

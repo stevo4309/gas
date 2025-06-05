@@ -3,7 +3,7 @@
         'name' => 'joymart/gas-project',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '9215cbfe11d87177bedf6e75d8a7bc6972e90718',
+        'reference' => '2c6f142495554edaaa0e4644e4cc9fbd06c9f00b',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'joymart/gas-project' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '9215cbfe11d87177bedf6e75d8a7bc6972e90718',
+            'reference' => '2c6f142495554edaaa0e4644e4cc9fbd06c9f00b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
