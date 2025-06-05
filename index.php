@@ -207,9 +207,9 @@ $user_id = $_SESSION['user_id'];
     <div class="container header-container">
         <div class="logo">
             <h1 class="logo-name">
-                <span>J</span><span>O</span><span>Y</span>
+                <span>J</span><span>o</span><span>y</span>
                 <span>&nbsp;</span>
-                <span>S</span><span>M</span><span>A</span><span>R</span><span>T</span>
+                <span>s</span><span>m</span><span>a</span><span>r</span><span>t</span>
                 <span>&nbsp;</span>
                 <span>G</span><span>a</span><span>s</span>
             </h1>
