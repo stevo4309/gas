@@ -225,67 +225,69 @@ if (!$products) {
             color: white;
         }
 
-        /* Responsive styles for mobile */
-        @media (max-width: 768px) {
-            body {
-                padding-right: 0;
-            }
+       @media (max-width: 768px) {
+    body {
+        padding-right: 0;
+    }
 
-            .cart-sidebar {
-                position: static;
-                width: 100%;
-                height: auto;
-                padding: 15px;
-            }
+    .cart-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 15px;
+    }
 
-            .container {
-                margin: 10px;
-                padding: 20px;
-            }
+    .container {
+        margin: 10px;
+        padding: 20px;
+    }
 
-            .products {
-                grid-template-columns: 1fr;
-            }
+    /* Change here: 2 columns on mobile */
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
 
-            .product img {
-                width: 80px;
-            }
+    .product img {
+        width: 80px;
+    }
 
-            .btn, .btn-order, .btn-remove {
-                font-size: 14px;
-                padding: 10px;
-            }
+    .btn, .btn-order, .btn-remove {
+        font-size: 14px;
+        padding: 10px;
+    }
 
-            h2 {
-                font-size: 22px;
-            }
+    h2 {
+        font-size: 22px;
+    }
 
-            .cart-sidebar h3 {
-                font-size: 20px;
-            }
+    .cart-sidebar h3 {
+        font-size: 20px;
+    }
 
-            .cart-item {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                flex-wrap: wrap;
-            }
+    .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
 
-            .cart-item img {
-                width: 30px;
-                margin-right: 10px;
-            }
+    .cart-item img {
+        width: 30px;
+        margin-right: 10px;
+    }
 
-            .cart-item small {
-                font-size: 13px;
-            }
+    .cart-item small {
+        font-size: 13px;
+    }
 
-            .cart-item form {
-                margin-top: 5px;
-                width: 100%;
-                text-align: right;
-            }
-        }
+    .cart-item form {
+        margin-top: 5px;
+        width: 100%;
+        text-align: right;
+    }
+}
+
     </style>
 </head>
 <body>
