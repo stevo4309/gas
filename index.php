@@ -37,45 +37,44 @@ $user_id = $_SESSION['user_id'];
 
     .header-container {
       display: flex;
+      flex-wrap: wrap; /* allow wrapping */
       justify-content: space-between;
       align-items: center;
       max-width: 1200px;
       margin: auto;
       padding: 20px;
-      flex-wrap: wrap;
     }
 
-    .logo-name span {
-      font-size: 32px;
+    .logo-name {
+      font-size: 28px;
       font-weight: bold;
       color: #051d5f;
       -webkit-text-stroke: 1.2px white;
+      flex: 1 1 200px; /* grow/shrink, basis */
     }
 
     nav {
-      flex: 1;
-      display: flex;
-      justify-content: flex-end; /* Always right-aligned */
+      flex: 1 1 300px; /* grow/shrink, basis */
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 30px; /* space between menu items */
+      flex-wrap: wrap; /* allow nav items to wrap to next line */
+      gap: 30px;
+      justify-content: flex-end; /* align nav items right */
       margin: 0;
       padding: 0;
-      flex-wrap: nowrap; /* No wrapping */
-      align-items: center;
     }
 
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-weight: 600;
+      font-size: 18px;
       padding: 8px 12px;
       border-radius: 4px;
-      transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-      font-size: 18px;
+      transition: background-color 0.3s ease, color 0.3s ease;
       display: inline-block;
     }
 
@@ -212,19 +211,13 @@ $user_id = $_SESSION['user_id'];
 
 <header>
   <div class="header-container">
-    <h1 class="logo-name">
-      <span>J</span><span>O</span><span>Y</span>
-      <span>&nbsp;</span>
-      <span>S</span><span>M</span><span>A</span><span>R</span><span>T</span>
-      <span>&nbsp;</span>
-      <span>G</span><span>A</span><span>S</span>
-    </h1>
+    <h1 class="logo-name">JOYSMART GAS</h1>
     <nav>
       <ul>
-        <li><a href="index.php">Home</a></li>
-        <li><a href="products.php">Products</a></li>
-        <li><a href="contact.php">Contact</a></li>
-        <li><a href="about.php">About</a></li>
+        <li><a href="index.php">HOME</a></li>
+        <li><a href="products.php">PRODUCTS</a></li>
+        <li><a href="contact.php">CONTACTS</a></li>
+        <li><a href="about.php">ABOUT</a></li>
       </ul>
     </nav>
   </div>
