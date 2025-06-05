@@ -104,6 +104,18 @@ header {
   #menu-toggle:checked + .menu-icon + .nav-menu {
     display: flex;
   }
+  .logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: white;
+  background: linear-gradient(to right, #ffe600, #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
 }
 
   </style>
