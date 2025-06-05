@@ -37,12 +37,12 @@ $user_id = $_SESSION['user_id'];
 
     .header-container {
       display: flex;
-      flex-wrap: wrap; /* allow wrapping */
       justify-content: space-between;
       align-items: center;
       max-width: 1200px;
       margin: auto;
       padding: 20px;
+      /* Removed flex-wrap: wrap to keep single row always */
     }
 
     .logo-name {
@@ -50,21 +50,23 @@ $user_id = $_SESSION['user_id'];
       font-weight: bold;
       color: #051d5f;
       -webkit-text-stroke: 1.2px white;
-      flex: 1 1 200px; /* grow/shrink, basis */
+      flex: 1 1 200px;
+      white-space: nowrap;
     }
 
     nav {
-      flex: 1 1 300px; /* grow/shrink, basis */
+      flex: 1 1 300px;
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      flex-wrap: wrap; /* allow nav items to wrap to next line */
       gap: 30px;
-      justify-content: flex-end; /* align nav items right */
+      justify-content: flex-end;
       margin: 0;
       padding: 0;
+      overflow-x: auto; /* allow horizontal scroll on very small screens */
+      white-space: nowrap;
     }
 
     nav ul li a {
@@ -211,13 +213,19 @@ $user_id = $_SESSION['user_id'];
 
 <header>
   <div class="header-container">
-    <h1 class="logo-name">JOYSMART GAS</h1>
+    <h1 class="logo-name">
+      <span>J</span><span>O</span><span>Y</span>
+      <span>&nbsp;</span>
+      <span>S</span><span>M</span><span>A</span><span>R</span><span>T</span>
+      <span>&nbsp;</span>
+      <span>G</span><span>A</span><span>S</span>
+    </h1>
     <nav>
       <ul>
-        <li><a href="index.php">HOME</a></li>
-        <li><a href="products.php">PRODUCTS</a></li>
-        <li><a href="contact.php">CONTACTS</a></li>
-        <li><a href="about.php">ABOUT</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="products.php">Products</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li><a href="about.php">About</a></li>
       </ul>
     </nav>
   </div>
