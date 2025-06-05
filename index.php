@@ -52,24 +52,37 @@ $user_id = $_SESSION['user_id'];
       -webkit-text-stroke: 1.2px white;
     }
 
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end; /* Always right-aligned */
+    }
+
     nav ul {
       list-style: none;
       display: flex;
-      gap: 20px;
+      gap: 30px; /* space between menu items */
+      margin: 0;
+      padding: 0;
+      flex-wrap: nowrap; /* No wrapping */
+      align-items: center;
     }
 
     nav ul li a {
       color: #fff;
       text-decoration: none;
       font-weight: 600;
-      padding: 6px 12px;
+      padding: 8px 12px;
       border-radius: 4px;
-      transition: all 0.3s ease;
+      transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+      font-size: 18px;
+      display: inline-block;
     }
 
     nav ul li a:hover {
       background-color: white;
       color: #ec0d0d;
+      box-shadow: 0 4px 8px rgba(236, 13, 13, 0.4);
     }
 
     .hero {
@@ -126,10 +139,15 @@ $user_id = $_SESSION['user_id'];
       margin-bottom: 30px;
     }
 
+    /* Cards container: use flexbox for 2 per row on mobile/tablets */
     .cards-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 20px;
+      justify-content: center;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
     }
 
     .card {
@@ -139,12 +157,30 @@ $user_id = $_SESSION['user_id'];
       border-radius: 8px;
       text-align: center;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      flex: 1 1 calc(25% - 20px); /* default 4 cards per row on large screens */
+      max-width: calc(25% - 20px);
     }
 
     .card img {
       width: 100%;
       border-radius: 4px;
       margin-bottom: 10px;
+    }
+
+    /* Tablet and mobile: 2 cards per row */
+    @media (max-width: 992px) {
+      .card {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+      }
+    }
+
+    /* Small phones: cards stack full width */
+    @media (max-width: 480px) {
+      .card {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
     }
 
     .cta {
@@ -169,19 +205,6 @@ $user_id = $_SESSION['user_id'];
       color: white;
       text-align: center;
       padding: 20px;
-    }
-
-    @media (max-width: 768px) {
-      nav ul {
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-end;
-      }
-
-      .header-container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
