@@ -1,25 +1,26 @@
-FROM php:8.2-apache
+# Use the official PHP image
+FROM php:8.2-cli
 
+# Install system dependencies and PHP extensions
+RUN apt-get update && apt-get install -y \
+    git zip unzip curl libzip-dev libonig-dev libxml2-dev \
+    && docker-php-ext-install pdo pdo_mysql zip mbstring
+
+# Install Composer globally
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer
+
+# Set working directory
 WORKDIR /var/www/html
 
-# Install PHP extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Copy composer files first to leverage cache
-COPY composer.json composer.lock ./
+# Copy all files
+COPY . .
 
 # Run composer install
 RUN composer install --no-dev --optimize-autoloader
 
-# Now copy the rest of your application
-COPY . .
+# Expose port (if needed)
+EXPOSE 8000
 
-EXPOSE 80
-
-CMD ["apache2-foreground"]
+# Default command
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
