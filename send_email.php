@@ -9,7 +9,7 @@ function sendOrderEmail($to, $subject, $body) {
 
     try {
         // Enable verbose debug output for SMTP connection troubleshooting
-        $mail->SMTPDebug = 2; // 0 = off, 1 = client messages, 2 = client and server messages
+$mail->SMTPDebug = 0;
         $mail->Debugoutput = 'html';
 
         //Server settings
