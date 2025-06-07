@@ -86,18 +86,93 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Confirm Your Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f8f9fa; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        h2, h3 { text-align: center; }
-        input, textarea, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
-        textarea { height: 80px; resize: vertical; }
-        button { background-color: #007bff; color: white; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-        .error-message { color: red; text-align: center; margin-bottom: 10px; }
-        .success-message { color: green; text-align: center; margin-bottom: 10px; }
-        ul { list-style-type: none; padding: 0; }
-        ul li { padding: 5px 0; }
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin-top: 0;
+            color: #333;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .error-message, .success-message {
+            text-align: center;
+            font-size: 1rem;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 0.5rem; }
+            .container { padding: 1rem; }
+            h2, h3 { font-size: 1.5rem; }
+            input, textarea, select, button { font-size: 1rem; padding: 0.7rem; }
+        }
     </style>
 </head>
 <body>
