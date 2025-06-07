@@ -4,20 +4,21 @@ $mysqli = new mysqli(
     'root',                     // user
     'kcvXfefWZmWlTSwRZWmOkHCakVdwTAiu',  // password
     'railway',                  // database
-    45164                       // port
+    45164                       // port (make sure it's correct from Railway)
 );
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
+// Add missing columns
 $sql = "ALTER TABLE orders
-        ADD COLUMN subcounty VARCHAR(255) DEFAULT '';";
+        ADD COLUMN IF NOT EXISTS delivery_address TEXT;";
 
 if ($mysqli->query($sql) === TRUE) {
-    echo "Subcounty column added successfully.";
+    echo "Columns added successfully.";
 } else {
-    echo "Error adding column: " . $mysqli->error;
+    echo "Error updating table: " . $mysqli->error;
 }
 
 $mysqli->close();
