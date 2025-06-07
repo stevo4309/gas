@@ -4,7 +4,7 @@ $mysqli = new mysqli(
     'root',                     // user
     'kcvXfefWZmWlTSwRZWmOkHCakVdwTAiu',  // password
     'railway',                  // database
-    45164                       // ✅ correct port from Railway
+    45164                       // port
 );
 
 if ($mysqli->connect_error) {
@@ -12,14 +12,12 @@ if ($mysqli->connect_error) {
 }
 
 $sql = "ALTER TABLE orders
-        ADD COLUMN county VARCHAR(255) DEFAULT '',
-        ADD COLUMN town VARCHAR(255) DEFAULT '',
-        ADD COLUMN additional_notes TEXT;"; // ❌ removed DEFAULT from TEXT
+        ADD COLUMN subcounty VARCHAR(255) DEFAULT '';";
 
 if ($mysqli->query($sql) === TRUE) {
-    echo "Table updated successfully.";
+    echo "Subcounty column added successfully.";
 } else {
-    echo "Error updating table: " . $mysqli->error;
+    echo "Error adding column: " . $mysqli->error;
 }
 
 $mysqli->close();
