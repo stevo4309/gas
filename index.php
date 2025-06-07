@@ -19,109 +19,200 @@ $user_id = $_SESSION['user_id'];
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-/* Reset basic styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: 'Poppins', sans-serif;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
 
-/* Modern header layout */
-header {
-  background-color: #ec0d0d;
-  color: white;
-  padding: 16px 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
+    header {
+      background-color: #ec0d0d;
+      color: white;
+      padding: 16px 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
 
-.modern-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: auto;
-  position: relative;
-}
+    .modern-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+    }
 
-.logo {
-  font-size: 24px;
-  font-weight: 700;
-  color: #fff;
-  -webkit-text-stroke: 0.8px #051d5f;
-  white-space: nowrap;
-}
+    .logo {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
 
-.nav-menu {
-  display: flex;
-  gap: 24px;
-}
+    .logo span {
+      display: inline-block;
+      background-color: white;
+      color: black;
+      font-size: 2em;
+      padding: 10px;
+      font-weight: bold;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
-.nav-menu a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  padding: 8px 12px;
-  border-radius: 4px;
-}
-.nav-menu a:hover {
-  background-color: white;
-  color: #ec0d0d;
-}
+    .nav-menu {
+      display: flex;
+      gap: 24px;
+    }
 
-/* Mobile menu */
-.menu-icon {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  user-select: none;
-}
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
 
-#menu-toggle {
-  display: none;
-}
+    .nav-menu a:hover {
+      background-color: white;
+      color: #ec0d0d;
+    }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .menu-icon {
-    display: block;
-    color: white;
-  }
-  .nav-menu {
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background:rgb(240, 199, 199);
-    width: 200px;
-    display: none;
-    padding: 10px 0;
-    border-radius: 8px;
-  }
-  #menu-toggle:checked + .menu-icon + .nav-menu {
-    display: flex;
-  }
- .logo {
-  display: inline-block;
-  background-color: white; /* White background wrap */
-  color: black;            /* Black text */
-  font-size: 2em;
-  padding: 10px 20px;
-  font-weight: bold;
-}
+    .menu-icon {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      user-select: none;
+    }
 
-}
+    #menu-toggle {
+      display: none;
+    }
 
+    @media (max-width: 768px) {
+      .menu-icon {
+        display: block;
+        color: white;
+      }
+
+      .nav-menu {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: rgb(240, 199, 199);
+        width: 200px;
+        display: none;
+        padding: 10px 0;
+        border-radius: 8px;
+      }
+
+      #menu-toggle:checked + .menu-icon + .nav-menu {
+        display: flex;
+      }
+    }
+
+    .hero {
+      background: #fefefe;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .hero-content h2 {
+      font-size: 2.2em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.1em;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .btn.primary-btn {
+      padding: 12px 24px;
+      background-color: #ec0d0d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .shop-section img.shop-image {
+      width: 100%;
+      display: block;
+      max-width: 900px;
+      margin: 20px auto;
+      border-radius: 12px;
+    }
+
+    .about {
+      background: #f9f9f9;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .cta {
+      background-color: #ec0d0d;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .cta .btn {
+      margin-top: 20px;
+      background-color: white;
+      color: #ec0d0d;
+      padding: 12px 24px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #222;
+      color: #ccc;
+      padding: 20px;
+    }
   </style>
 </head>
 <body>
 
 <header>
   <div class="modern-header">
-    <div class="logo">JOYSMART GAS</div>
+    <div class="logo">
+      <?php
+        $brand = "JOYSMART GAS";
+        foreach (str_split($brand) as $letter) {
+            echo "<span>" . htmlspecialchars($letter) . "</span>";
+        }
+      ?>
+    </div>
     <input type="checkbox" id="menu-toggle">
     <label for="menu-toggle" class="menu-icon">&#9776;</label>
     <nav class="nav-menu">
@@ -133,11 +224,10 @@ header {
   </div>
 </header>
 
-
 <section class="hero">
   <div class="hero-content">
     <h2>Fast & Reliable Cooking Gas Delivery</h2>
-    <p>Order now and enjoy fast, free delivery within Ruiru! We also sell complete gas cylinder and delivery across Kenya.</p>
+    <p>Order now and enjoy fast, free delivery within Ruiru! We also sell complete gas cylinders and deliver across Kenya.</p>
     <a href="products.php" class="btn primary-btn">Order Now</a>
   </div>
 </section>
@@ -181,7 +271,7 @@ header {
 <section class="cta">
   <div class="container">
     <h2>Need a Gas Refill?</h2>
-    <p>Order now and enjoy fast, free delivery within Ruiru! We also sell complete gas cylinder and delivery across Kenya.</p>
+    <p>Order now and enjoy fast, free delivery within Ruiru! We also sell complete gas cylinders and deliver across Kenya.</p>
     <a href="contact.php" class="btn">Contact Us</a>
   </div>
 </section>
