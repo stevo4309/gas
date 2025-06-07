@@ -120,7 +120,7 @@ header {
 <header>
   <div class="modern-header">
     <div class="logo">
-      <img src="images/flame-icon.png" alt="Flame Icon" class="flame-icon" />
+      <img src="images/flame-icon.jpeg" alt="Flame Icon" class="flame-icon" />
       JOY SMART GAS
     </div>
     <input type="checkbox" id="menu-toggle">
