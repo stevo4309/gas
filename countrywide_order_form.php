@@ -3,11 +3,10 @@ session_start();
 require 'db_connection.php';
 require 'send_email.php';
 
-$customer_name = $phone_number = $apartment_name = $location = $location_details = $payment_method = "";
+$customer_name = $phone_number = $county = $subcounty = $delivery_address = $payment_method = "";
 $errorMessage = $successMessage = "";
 
 $cartType = $_GET['type'] ?? '';
-$locationFromUrl = $_GET['location'] ?? '';
 $cartItems = [];
 
 switch ($cartType) {
@@ -25,19 +24,19 @@ switch ($cartType) {
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $customer_name = trim($_POST["customer_name"] ?? '');
     $phone_number = trim($_POST["phone_number"] ?? '');
-    $apartment_name = trim($_POST["apartment_name"] ?? '');
-    $location = trim($_POST["location"] ?? $locationFromUrl);
-    $location_details = trim($_POST["location_details"] ?? '');
+    $county = trim($_POST["county"] ?? '');
+    $subcounty = trim($_POST["subcounty"] ?? '');
+    $delivery_address = trim($_POST["delivery_address"] ?? '');
     $payment_method = trim($_POST["payment_method"] ?? '');
 
-    if (empty($customer_name) || empty($phone_number) || empty($location) || empty($payment_method) || empty($cartItems)) {
+    if (empty($customer_name) || empty($phone_number) || empty($county) || empty($subcounty) || empty($delivery_address) || empty($payment_method) || empty($cartItems)) {
         $errorMessage = "All fields and cart items are required.";
     } else {
         $items_json = json_encode($cartItems);
-        $sql = "INSERT INTO orders (items, customer_name, phone_number, apartment_name, location, location_details, payment_method)
+        $sql = "INSERT INTO orders (items, customer_name, phone_number, county, subcounty, delivery_address, payment_method)
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssssss", $items_json, $customer_name, $phone_number, $apartment_name, $location, $location_details, $payment_method);
+        $stmt->bind_param("sssssss", $items_json, $customer_name, $phone_number, $county, $subcounty, $delivery_address, $payment_method);
 
         if ($stmt->execute()) {
             $successMessage = "Order Sent Successfully!";
@@ -45,9 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $emailBody = "New order details:\n\n"
                 . "Customer Name: $customer_name\n"
                 . "Phone Number: $phone_number\n"
-                . "Apartment: $apartment_name\n"
-                . "Location: $location\n"
-                . "Location Details: $location_details\n"
+                . "County: $county\n"
+                . "Sub-county / Town: $subcounty\n"
+                . "Exact Address: $delivery_address\n"
                 . "Payment Method: $payment_method\n\n"
                 . "Ordered Items:\n";
 
@@ -62,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $emailBody .= "\nTotal: Ksh " . number_format($total);
             sendOrderEmail('joysmartgas@gmail.com', 'New Order - Joy Smart Gas', $emailBody);
 
-            // Clear session cart
             switch ($cartType) {
                 case 'accessories':
                     unset($_SESSION['accessories_cart']);
@@ -74,7 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     unset($_SESSION['refill_cart']);
                     break;
             }
-
         } else {
             $errorMessage = "Error saving order: " . $conn->error;
         }
@@ -134,43 +131,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php endif; ?>
 
     <?php if (empty($successMessage)): ?>
-        <form id="orderForm" action="?type=<?= htmlspecialchars($cartType) ?>&location=<?= urlencode($locationFromUrl) ?>" method="POST">
+        <form id="orderForm" action="?type=<?= htmlspecialchars($cartType) ?>" method="POST">
             <input type="hidden" id="cartCount" value="<?= count($cartItems) ?>">
 
-            <label>Full Name:</label>
-            <input type="text" name="customer_name" value="<?= htmlspecialchars($customer_name) ?>" required>
+            <label for="name">Full Name:</label>
+            <input type="text" name="customer_name" required>
 
-            <label>Phone Number:</label>
-            <input type="tel" name="phone_number" value="<?= htmlspecialchars($phone_number) ?>" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" name="phone_number" placeholder="07XXXXXXXX" pattern="07[0-9]{8}" required>
 
-            <label>Apartment Name:</label>
-            <input type="text" name="apartment_name" value="<?= htmlspecialchars($apartment_name) ?>">
+            <label for="county">County:</label>
+            <input type="text" name="county" required>
 
-            <label>Delivery Location (Ruiru Areas):</label>
-            <select name="location" required>
-                <option value="">-- Select Location --</option>
-                <?php
-                $ruiru_areas = [
-                    'Ruiru Town', 'Kamakis', 'Gatongora', 'Kwa Kairu', 'Membley', 'Bati', 'Gwa Kairu', 
-                    'Mugutha', 'Rainbow', 'Kimbo', 'Kihunguro', 'Ruiru East', 'Ruiru Bypass', 
-                    'Ruiru West', 'Toll Station', 'Mwalimu Farm', 'Kamakis Bypass'
-                ];
-                foreach ($ruiru_areas as $area) {
-                    $selected = ($location === $area || $locationFromUrl === $area) ? 'selected' : '';
-                    echo "<option value=\"$area\" $selected>$area</option>";
-                }
-                ?>
-            </select>
+            <label for="subcounty">Sub-county / Town:</label>
+            <input type="text" name="subcounty" required>
 
-            <label>Additional Location Details:</label>
-            <textarea name="location_details" placeholder="Floor, House Number, Landmark"><?= htmlspecialchars($location_details) ?></textarea>
+            <label for="address">Exact Delivery Address:</label>
+            <textarea name="delivery_address" required></textarea>
 
             <label>Payment Method:</label>
             <select name="payment_method" required>
                 <option value="">-- Select Payment Method --</option>
-                <option value="Cash" <?= ($payment_method == 'Cash') ? 'selected' : '' ?>>Cash on Delivery</option>
-                <option value="MPesa" <?= ($payment_method == 'MPesa') ? 'selected' : '' ?>>MPesa</option>
-                <option value="Card" <?= ($payment_method == 'Card') ? 'selected' : '' ?>>Card</option>
+                <option value="Cash">Cash on Delivery</option>
+                <option value="MPesa">MPesa</option>
+                <option value="Card">Card</option>
             </select>
 
             <button type="submit">Confirm Order</button>
