@@ -63,7 +63,6 @@ header {
   margin: 0 2px;
   border-radius: 6px;
   /* Optional: add a subtle shadow or border for better shape */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   user-select: none;
 }
 
