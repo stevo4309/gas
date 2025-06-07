@@ -11,10 +11,10 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-$sql = "ALTER TABLE orders MODIFY COLUMN apartment_name VARCHAR(255) NULL DEFAULT NULL";
+$sql = "ALTER TABLE orders MODIFY COLUMN location VARCHAR(255) NULL DEFAULT NULL";
 
 if ($mysqli->query($sql) === TRUE) {
-    echo "Column 'apartment_name' modified successfully.<br>";
+    echo "Column 'location' modified successfully.<br>";
 } else {
     echo "Error modifying column: " . $mysqli->error . "<br>";
 }
