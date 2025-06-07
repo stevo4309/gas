@@ -104,16 +104,13 @@ header {
   #menu-toggle:checked + .menu-icon + .nav-menu {
     display: flex;
   }
-  .logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  .logo{
+  display: inline-block;
+  background-color: red;
   color: white;
-  background: linear-gradient(to right,rgb(0, 110, 255),rgb(0, 89, 255));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  font-size: 2em;
+  padding: 10px 20px;
+  font-weight: bold;
 }
 
 }
