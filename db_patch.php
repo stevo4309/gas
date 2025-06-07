@@ -11,29 +11,20 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-$queries = [
-    "ALTER TABLE orders ADD COLUMN items TEXT",
-    "ALTER TABLE orders ADD COLUMN customer_name VARCHAR(255)",
-    "ALTER TABLE orders ADD COLUMN phone_number VARCHAR(20)",
-    "ALTER TABLE orders ADD COLUMN county VARCHAR(255)",
-    "ALTER TABLE orders ADD COLUMN subcounty VARCHAR(255)",
-    "ALTER TABLE orders ADD COLUMN delivery_address TEXT",
-    "ALTER TABLE orders ADD COLUMN payment_method VARCHAR(50)",
-    // Optional: add created_at timestamp column if you want
-    "ALTER TABLE orders ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
-];
+$column = 'delivery_address';
+$table = 'orders';
 
-foreach ($queries as $sql) {
+// Check if column exists
+$result = $mysqli->query("SHOW COLUMNS FROM $table LIKE '$column'");
+if ($result->num_rows === 0) {
+    $sql = "ALTER TABLE $table ADD COLUMN $column TEXT";
     if ($mysqli->query($sql) === TRUE) {
-        echo "Column added successfully.<br>";
+        echo "Column '$column' added successfully.<br>";
     } else {
-        // Ignore error if column already exists (error code 1060)
-        if ($mysqli->errno == 1060) {
-            echo "Column already exists, skipping.<br>";
-        } else {
-            echo "Error updating table: " . $mysqli->error . "<br>";
-        }
+        echo "Error updating table: " . $mysqli->error . "<br>";
     }
+} else {
+    echo "Column '$column' already exists, skipping.<br>";
 }
 
 $mysqli->close();
