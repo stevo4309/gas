@@ -55,7 +55,7 @@ header {
 
 .logo span {
   display: inline-block;
-  background: white;
+  word-wrap: normal;
   color: black;
   font-weight: bold;
   font-size: 2em;
@@ -67,7 +67,7 @@ header {
   user-select: none;
 }
 
-}
+
 
 .nav-menu {
   display: flex;
