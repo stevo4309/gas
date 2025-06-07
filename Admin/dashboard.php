@@ -145,7 +145,7 @@
 
 <!-- Main Content -->
 <div class="main-content">
-  <h1>Welcome, <?= htmlspecialchars($_SESSION['admin_username']) ?>!</h1>
+<h1>Welcome, <?= isset($_SESSION['admin_username']) ? htmlspecialchars($_SESSION['admin_username']) : 'Admin' ?>!</h1>
 
   <!-- Dashboard Cards -->
   <div class="cards-container">
