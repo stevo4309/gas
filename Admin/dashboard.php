@@ -8,7 +8,6 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
