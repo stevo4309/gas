@@ -54,14 +54,19 @@ header {
 }
 
 .logo span {
-  background-color: white;
-  color: black;
-  font-size: 1.8em;
-  font-weight: bold;
-  padding: 5px 8px;
-  border-radius: 4px;
   display: inline-block;
-  -webkit-text-stroke: 0.5px #051d5f;
+  background: white;
+  color: black;
+  font-weight: bold;
+  font-size: 2em;
+  padding: 5px 10px;
+  margin: 0 2px;
+  border-radius: 6px;
+  /* Optional: add a subtle shadow or border for better shape */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  user-select: none;
+}
+
 }
 
 .nav-menu {
