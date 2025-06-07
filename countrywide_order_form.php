@@ -3,76 +3,83 @@ session_start();
 require 'db_connection.php';
 require 'send_email.php';
 
-$customer_name = $phone_number = $county = $subcounty = $delivery_address = $payment_method = '';
-$successMessage = $errorMessage = '';
+$customer_name = $phone_number = $apartment_name = $location = $location_details = $payment_method = "";
+$errorMessage = $successMessage = "";
 
-// Load cart from session
-$cart = $_SESSION['complete_cart'] ?? [];
-$total = 0;
-foreach ($cart as $item) {
-    $quantity = (int)($item['quantity'] ?? 1);
-    $price = (float)($item['price'] ?? 0);
-    $total += $price * $quantity;
+$cartType = $_GET['type'] ?? '';
+$locationFromUrl = $_GET['location'] ?? '';
+$cartItems = [];
+
+switch ($cartType) {
+    case 'accessories':
+        $cartItems = $_SESSION['accessories_cart'] ?? [];
+        break;
+    case 'complete_gas':
+        $cartItems = $_SESSION['complete_cart'] ?? [];
+        break;
+    case 'refill':
+        $cartItems = $_SESSION['refill_cart'] ?? [];
+        break;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $customer_name = $_POST["customer_name"] ?? '';
-    $phone_number = $_POST["phone_number"] ?? '';
-    $county = $_POST["county"] ?? '';
-    $subcounty = $_POST["subcounty"] ?? '';
-    $delivery_address = $_POST["delivery_address"] ?? '';
-    $payment_method = $_POST["payment_method"] ?? '';
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $customer_name = trim($_POST["customer_name"] ?? '');
+    $phone_number = trim($_POST["phone_number"] ?? '');
+    $apartment_name = trim($_POST["apartment_name"] ?? '');
+    $location = trim($_POST["location"] ?? $locationFromUrl);
+    $location_details = trim($_POST["location_details"] ?? '');
+    $payment_method = trim($_POST["payment_method"] ?? '');
 
-    if (empty($cart)) {
-        $errorMessage = "Your cart is empty.";
-    } elseif (
-        empty($customer_name) || empty($phone_number) || empty($county) || 
-        empty($subcounty) || empty($delivery_address) || empty($payment_method)
-    ) {
-        $errorMessage = "All fields are required.";
+    if (empty($customer_name) || empty($phone_number) || empty($location) || empty($payment_method) || empty($cartItems)) {
+        $errorMessage = "All fields and cart items are required.";
     } else {
-        foreach ($cart as $item) {
-            $product = $item['name'] ?? 'Unknown';
-            $brand = $item['brand'] ?? 'N/A';
-            $size = $item['size'] ?? 'N/A';
-            $price = $item['price'] ?? 0;
-            $quantity = $item['quantity'] ?? 1;
+        $items_json = json_encode($cartItems);
+        $sql = "INSERT INTO orders (items, customer_name, phone_number, apartment_name, location, location_details, payment_method)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssss", $items_json, $customer_name, $phone_number, $apartment_name, $location, $location_details, $payment_method);
 
-            $apartment_name = ''; // not used
-            $location = $county . ' - ' . $subcounty;
-            $location_details = $delivery_address;
+        if ($stmt->execute()) {
+            $successMessage = "Order Sent Successfully!";
 
-            $sql = "INSERT INTO orders (product, brand, size, price, customer_name, phone_number, apartment_name, location, location_details, payment_method)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param(
-                "ssssssssss",
-                $product, $brand, $size, $price,
-                $customer_name, $phone_number, $apartment_name,
-                $location, $location_details, $payment_method
-            );
-            $stmt->execute();
-            $stmt->close();
-
-            // Send email
-            $emailBody = "New countrywide order:\n\n"
+            $emailBody = "New order details:\n\n"
                 . "Customer Name: $customer_name\n"
                 . "Phone Number: $phone_number\n"
-                . "Product: $product\n"
-                . "Brand: $brand\n"
-                . "Size: $size\n"
-                . "Quantity: $quantity\n"
-                . "Price per Unit: Ksh $price\n"
-                . "Total: Ksh " . ($price * $quantity) . "\n"
-                . "County/Sub-county: $location\n"
-                . "Address: $delivery_address\n"
-                . "Payment Method: $payment_method";
+                . "Apartment: $apartment_name\n"
+                . "Location: $location\n"
+                . "Location Details: $location_details\n"
+                . "Payment Method: $payment_method\n\n"
+                . "Ordered Items:\n";
 
-            sendOrderEmail('joysmartgas@gmail.com', 'New Countrywide Order - Joy Smart Gas', $emailBody);
+            $total = 0;
+            foreach ($cartItems as $item) {
+                $itemName = htmlspecialchars($item['name'] ?? $item['product'] ?? 'Unknown');
+                $itemPrice = (float)($item['price'] ?? 0);
+                $total += $itemPrice;
+                $emailBody .= "- $itemName: Ksh " . number_format($itemPrice) . "\n";
+            }
+
+            $emailBody .= "\nTotal: Ksh " . number_format($total);
+            sendOrderEmail('joysmartgas@gmail.com', 'New Order - Joy Smart Gas', $emailBody);
+
+            // Clear session cart
+            switch ($cartType) {
+                case 'accessories':
+                    unset($_SESSION['accessories_cart']);
+                    break;
+                case 'complete_gas':
+                    unset($_SESSION['complete_cart']);
+                    break;
+                case 'refill':
+                    unset($_SESSION['refill_cart']);
+                    break;
+            }
+
+        } else {
+            $errorMessage = "Error saving order: " . $conn->error;
         }
 
-        unset($_SESSION['complete_cart']);
-        $successMessage = "Order placed successfully!";
+        $stmt->close();
     }
 }
 ?>
@@ -81,75 +88,105 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Countrywide Delivery Order Form</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Order</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f1f3f5; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h2 { text-align: center; margin-bottom: 25px; }
-        label { font-weight: bold; display: block; margin-top: 15px; }
-        input, select, textarea, button { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
-        button { background-color: #007bff; color: white; margin-top: 25px; border: none; }
+        body { font-family: Arial, sans-serif; background-color: #f8f9fa; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        h2, h3 { text-align: center; }
+        input, textarea, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+        textarea { height: 80px; resize: vertical; }
+        button { background-color: #007bff; color: white; cursor: pointer; }
         button:hover { background-color: #0056b3; }
-        .summary { background-color: #e9ecef; padding: 15px; margin-bottom: 20px; border-radius: 5px; font-size: 15px; }
-        .error-message { color: red; margin-top: 10px; }
-        .success-message { color: green; margin-top: 10px; }
+        .error-message { color: red; text-align: center; margin-bottom: 10px; }
+        .success-message { color: green; text-align: center; margin-bottom: 10px; }
+        ul { list-style-type: none; padding: 0; }
+        ul li { padding: 5px 0; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Countrywide Order</h2>
+    <h2>Confirm Your Order</h2>
 
-    <?php if ($errorMessage): ?>
+    <?php if (!empty($errorMessage)): ?>
         <div class="error-message"><?= $errorMessage ?></div>
     <?php endif; ?>
 
-    <?php if ($successMessage): ?>
+    <?php if (!empty($successMessage)): ?>
         <div class="success-message"><?= $successMessage ?></div>
     <?php endif; ?>
 
-    <?php if (!empty($cart)): ?>
-        <div class="summary">
-            <strong>Order Summary:</strong><br><br>
-            <?php foreach ($cart as $item): ?>
-                Product: <?= htmlspecialchars($item['name'] ?? 'Unknown') ?><br>
-                Brand: <?= htmlspecialchars($item['brand'] ?? 'N/A') ?><br>
-                Size: <?= htmlspecialchars($item['size'] ?? 'N/A') ?><br>
-                Quantity: <?= htmlspecialchars($item['quantity'] ?? 1) ?><br>
-                Price per Unit: Ksh <?= number_format((float)($item['price'] ?? 0)) ?><br>
-                Subtotal: Ksh <?= number_format((float)($item['price'] ?? 0) * (int)($item['quantity'] ?? 1)) ?><br><br>
+    <?php if (!empty($cartItems)): ?>
+        <h3>Order Summary</h3>
+        <ul>
+            <?php $total = 0; ?>
+            <?php foreach ($cartItems as $item): 
+                $itemName = htmlspecialchars($item['name'] ?? $item['product'] ?? '');
+                $itemPrice = (float)($item['price'] ?? 0);
+                $total += $itemPrice;
+            ?>
+                <li><?= $itemName ?> — Ksh <?= number_format($itemPrice) ?></li>
             <?php endforeach; ?>
-            <strong>Total: Ksh <?= number_format($total) ?></strong>
-        </div>
+        </ul>
+        <p><strong>Total: </strong>Ksh <?= number_format($total) ?></p>
+    <?php else: ?>
+        <p>No items found in your cart.</p>
     <?php endif; ?>
 
-    <form method="POST">
-        <label for="name">Full Name:</label>
-        <input type="text" name="customer_name" required>
+    <?php if (empty($successMessage)): ?>
+        <form id="orderForm" action="?type=<?= htmlspecialchars($cartType) ?>&location=<?= urlencode($locationFromUrl) ?>" method="POST">
+            <input type="hidden" id="cartCount" value="<?= count($cartItems) ?>">
 
-        <label for="phone">Phone Number:</label>
-        <input type="tel" name="phone_number" placeholder="07XXXXXXXX" pattern="07[0-9]{8}" required>
+            <label>Full Name:</label>
+            <input type="text" name="customer_name" value="<?= htmlspecialchars($customer_name) ?>" required>
 
-        <label for="county">County:</label>
-        <input type="text" name="county" required>
+            <label>Phone Number:</label>
+            <input type="tel" name="phone_number" value="<?= htmlspecialchars($phone_number) ?>" required>
 
-        <label for="subcounty">Sub-county / Town:</label>
-        <input type="text" name="subcounty" required>
+            <label>Apartment Name:</label>
+            <input type="text" name="apartment_name" value="<?= htmlspecialchars($apartment_name) ?>">
 
-        <label for="address">Exact Delivery Address:</label>
-        <textarea name="delivery_address" required></textarea>
+            <label>Delivery Location (Ruiru Areas):</label>
+            <select name="location" required>
+                <option value="">-- Select Location --</option>
+                <?php
+                $ruiru_areas = [
+                    'Ruiru Town', 'Kamakis', 'Gatongora', 'Kwa Kairu', 'Membley', 'Bati', 'Gwa Kairu', 
+                    'Mugutha', 'Rainbow', 'Kimbo', 'Kihunguro', 'Ruiru East', 'Ruiru Bypass', 
+                    'Ruiru West', 'Toll Station', 'Mwalimu Farm', 'Kamakis Bypass'
+                ];
+                foreach ($ruiru_areas as $area) {
+                    $selected = ($location === $area || $locationFromUrl === $area) ? 'selected' : '';
+                    echo "<option value=\"$area\" $selected>$area</option>";
+                }
+                ?>
+            </select>
 
-        <label>Payment Method:</label>
-        <select name="payment_method" required>
-            <option value="">-- Select Payment Method --</option>
-            <option value="cash_on_delivery">Cash on Delivery</option>
-            <option value="mpesa">MPesa</option>
-        </select>
+            <label>Additional Location Details:</label>
+            <textarea name="location_details" placeholder="Floor, House Number, Landmark"><?= htmlspecialchars($location_details) ?></textarea>
 
-        <button type="submit">Place Order</button>
-    </form>
+            <label>Payment Method:</label>
+            <select name="payment_method" required>
+                <option value="">-- Select Payment Method --</option>
+                <option value="Cash" <?= ($payment_method == 'Cash') ? 'selected' : '' ?>>Cash on Delivery</option>
+                <option value="MPesa" <?= ($payment_method == 'MPesa') ? 'selected' : '' ?>>MPesa</option>
+                <option value="Card" <?= ($payment_method == 'Card') ? 'selected' : '' ?>>Card</option>
+            </select>
+
+            <button type="submit">Confirm Order</button>
+        </form>
+    <?php endif; ?>
 </div>
+
+<script>
+    document.getElementById("orderForm")?.addEventListener("submit", function(event) {
+        const cartCount = parseInt(document.getElementById("cartCount").value);
+        if (cartCount <= 0) {
+            event.preventDefault();
+            alert("Your cart is empty. Please add items before confirming your order.");
+        }
+    });
+</script>
 
 </body>
 </html>
