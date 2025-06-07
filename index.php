@@ -16,7 +16,7 @@ $user_id = $_SESSION['user_id'];
   <meta name="description" content="Joy Smart Gas provides fast, free delivery for cooking gas in Nairobi.">
   <meta name="keywords" content="Gas delivery, Cooking gas, Nairobi gas, Free gas delivery">
   <link rel="stylesheet" href="css/styles.css?v=<?php echo time(); ?>">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
 /* Reset basic styles */
@@ -29,7 +29,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-/* Modern header layout */
+/* Header layout */
 header {
   background-color: #ec0d0d;
   color: white;
@@ -46,33 +46,30 @@ header {
   position: relative;
 }
 
-/* Updated logo styling */
+/* Logo styling */
 .logo {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.6em;
+  letter-spacing: 1px;
+  background-color: #ec0d0d;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  gap: 10px;
+}
+.flame-icon {
+  height: 28px;
+  width: auto;
 }
 
-.logo span {
-  display: inline-block;
-  word-wrap: normal;
-  color: black;
-  font-weight: bold;
-  font-size: 2em;
-  padding: 5px 10px;
-  margin: 0 2px;
-  border-radius: 6px;
-  /* Optional: add a subtle shadow or border for better shape */
-  user-select: none;
-}
-
-
-
+/* Nav menu */
 .nav-menu {
   display: flex;
   gap: 24px;
 }
-
 .nav-menu a {
   color: white;
   text-decoration: none;
@@ -93,12 +90,9 @@ header {
   cursor: pointer;
   user-select: none;
 }
-
 #menu-toggle {
   display: none;
 }
-
-/* Responsive */
 @media (max-width: 768px) {
   .menu-icon {
     display: block;
@@ -109,7 +103,7 @@ header {
     position: absolute;
     top: 60px;
     right: 20px;
-    background:rgb(240, 199, 199);
+    background: rgb(240, 199, 199);
     width: 200px;
     display: none;
     padding: 10px 0;
@@ -126,9 +120,8 @@ header {
 <header>
   <div class="modern-header">
     <div class="logo">
-      <span>J</span><span>O</span><span>Y</span><span>S</span><span>M</span><span>A</span><span>R</span><span>T</span>
-      <span>&nbsp;</span>
-      <span>G</span><span>A</span><span>S</span>
+      <img src="images/flame-icon.png" alt="Flame Icon" class="flame-icon" />
+      JOY SMART GAS
     </div>
     <input type="checkbox" id="menu-toggle">
     <label for="menu-toggle" class="menu-icon">&#9776;</label>
