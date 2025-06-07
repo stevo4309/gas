@@ -88,18 +88,100 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Confirm Your Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f8f9fa; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        h2, h3 { text-align: center; }
-        input, textarea, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
-        textarea { height: 80px; resize: vertical; }
-        button { background-color: #007bff; color: white; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-        .error-message { color: red; text-align: center; margin-bottom: 10px; }
-        .success-message { color: green; text-align: center; margin-bottom: 10px; }
-        ul { list-style-type: none; padding: 0; }
-        ul li { padding: 5px 0; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 5px 0;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+                border-radius: 8px;
+            }
+
+            h2, h3 {
+                font-size: 1.3rem;
+            }
+
+            input, textarea, select, button {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -119,7 +201,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h3>Order Summary</h3>
         <ul>
             <?php $total = 0; ?>
-            <?php foreach ($cartItems as $item): 
+            <?php foreach ($cartItems as $item):
                 $itemName = htmlspecialchars($item['name'] ?? $item['product'] ?? '');
                 $itemPrice = (float)($item['price'] ?? 0);
                 $total += $itemPrice;
@@ -150,8 +232,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <option value="">-- Select Location --</option>
                 <?php
                 $ruiru_areas = [
-                    'Ruiru Town', 'Kamakis', 'Gatongora', 'Kwa Kairu', 'Membley', 'Bati', 'Gwa Kairu', 
-                    'Mugutha', 'Rainbow', 'Kimbo', 'Kihunguro', 'Ruiru East', 'Ruiru Bypass', 
+                    'Ruiru Town', 'Kamakis', 'Gatongora', 'Kwa Kairu', 'Membley', 'Bati', 'Gwa Kairu',
+                    'Mugutha', 'Rainbow', 'Kimbo', 'Kihunguro', 'Ruiru East', 'Ruiru Bypass',
                     'Ruiru West', 'Toll Station', 'Mwalimu Farm', 'Kamakis Bypass'
                 ];
                 foreach ($ruiru_areas as $area) {
