@@ -1,30 +1,22 @@
 <?php
 $mysqli = new mysqli(
-    'shortline.proxy.rlwy.net', 
-    'root',                     
-    'kcvXfefWZmWlTSwRZWmOkHCakVdwTAiu',  
-    'railway',                  
-    45164                       
+    'shortline.proxy.rlwy.net',
+    'root',
+    'kcvXfefWZmWlTSwRZWmOkHCakVdwTAiu',
+    'railway',
+    45164
 );
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-$column = 'delivery_address';
-$table = 'orders';
+$sql = "ALTER TABLE orders MODIFY COLUMN apartment_name VARCHAR(255) NULL DEFAULT NULL";
 
-// Check if column exists
-$result = $mysqli->query("SHOW COLUMNS FROM $table LIKE '$column'");
-if ($result->num_rows === 0) {
-    $sql = "ALTER TABLE $table ADD COLUMN $column TEXT";
-    if ($mysqli->query($sql) === TRUE) {
-        echo "Column '$column' added successfully.<br>";
-    } else {
-        echo "Error updating table: " . $mysqli->error . "<br>";
-    }
+if ($mysqli->query($sql) === TRUE) {
+    echo "Column 'apartment_name' modified successfully.<br>";
 } else {
-    echo "Column '$column' already exists, skipping.<br>";
+    echo "Error modifying column: " . $mysqli->error . "<br>";
 }
 
 $mysqli->close();
