@@ -128,45 +128,51 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         margin-left: 0;
         padding-top: 20px;
       }
+
+      .cards-container {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>Admin Panel</h2>
-    <ul>
-      <li><a href="index.php">📊 Dashboard</a></li>
-      <li><a href="manage_accessories.php">🛍 Manage Accessories</a></li>
-      <li><a href="manage_complete_gas.php">🔥 Manage Gas Cylinders</a></li>
-      <li><a href="manage_refill.php">⛽ Manage Refilling</a></li>
-      <li><a href="admin_messages.php">📩 Admin Messages</a></li>
-      <li><a href="orders.php">📦 Orders</a></li>
-      <li><a href="logout.php">🚪 Logout</a></li>
-    </ul>
-  </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <h1>Welcome, <?= htmlspecialchars($_SESSION['admin_username']) ?>!</h1>
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2>Admin Panel</h2>
+  <ul>
+    <li><a href="index.php">📊 Dashboard</a></li>
+    <li><a href="manage_accessories.php">🛍 Manage Accessories</a></li>
+    <li><a href="manage_complete_gas.php">🔥 Manage Gas Cylinders</a></li>
+    <li><a href="manage_refill.php">⛽ Manage Refilling</a></li>
+    <li><a href="admin_messages.php">📩 Admin Messages</a></li>
+    <li><a href="orders.php">📦 Orders</a></li>
+    <li><a href="logout.php">🚪 Logout</a></li>
+  </ul>
+</div>
 
-    <!-- Dashboard Cards -->
-    <div class="cards-container">
-      <div class="card">
-        <h3>📦 Total Orders</h3>
-        <p>128</p>
-      </div>
+<!-- Main Content -->
+<div class="main-content">
+  <h1>Welcome, <?= htmlspecialchars($_SESSION['admin_username']) ?>!</h1>
 
-      <div class="card">
-        <h3>📩 New Messages</h3>
-        <p>5</p>
-      </div>
+  <!-- Dashboard Cards -->
+  <div class="cards-container">
+    <div class="card">
+      <h3>📦 Total Orders</h3>
+      <p>128</p>
+    </div>
 
-      <div class="card low-stock">
-        <h3>⚠️ Low Stock Alerts</h3>
-        <p>3 Items</p>
-      </div>
+    <div class="card">
+      <h3>📩 New Messages</h3>
+      <p>5</p>
+    </div>
+
+    <div class="card low-stock">
+      <h3>⚠️ Low Stock Alerts</h3>
+      <p>3 Items</p>
     </div>
   </div>
+</div>
+
 </body>
 </html>

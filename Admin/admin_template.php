@@ -12,7 +12,14 @@
     <?php include 'sidebar.php'; ?> <!-- Include Sidebar -->
 
     <div class="main-content">
-        <?php include $page; ?> <!-- Dynamic Content -->
+        <?php
+        // Secure include to avoid path injection
+        if (isset($page) && file_exists($page)) {
+            include $page;
+        } else {
+            echo "<p>Page not found.</p>";
+        }
+        ?>
     </div>
 </div>
 
