@@ -104,13 +104,13 @@ header {
   #menu-toggle:checked + .menu-icon + .nav-menu {
     display: flex;
   }
-  .logo{
+ .logo {
   display: inline-block;
-  background-color: red;
-  color: white;
+  background-color: white; /* White background wrap */
+  color: black;            /* Black text */
   font-size: 2em;
   padding: 10px 20px;
-  font-weight: bold;
+  font-weight: bold;
 }
 
 }
