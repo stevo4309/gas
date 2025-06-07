@@ -25,6 +25,7 @@
       overflow-x: hidden;
     }
 
+    /* Sidebar */
     .sidebar {
       width: 250px;
       height: 100vh;
@@ -35,6 +36,7 @@
       left: 0;
       padding: 20px;
       z-index: 1000;
+      transition: transform 0.3s ease-in-out;
     }
 
     .sidebar h2 {
@@ -67,10 +69,12 @@
       color: var(--dark-bg);
     }
 
+    /* Main Content */
     .main-content {
       margin-left: 270px;
       padding: 40px 20px;
       min-height: 100vh;
+      transition: margin-left 0.3s ease-in-out;
     }
 
     .main-content h1 {
@@ -79,6 +83,7 @@
       margin-bottom: 30px;
     }
 
+    /* Cards container and cards */
     .cards-container {
       display: flex;
       flex-wrap: wrap;
@@ -109,28 +114,73 @@
       color: red;
     }
 
+    /* Hamburger menu button */
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: var(--primary-color);
+      border: none;
+      padding: 10px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* Mobile Styles */
     @media screen and (max-width: 768px) {
       .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        width: 250px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
       }
 
       .main-content {
         margin-left: 0;
-        padding-top: 20px;
+        padding: 70px 20px 20px;
       }
 
       .cards-container {
         flex-direction: column;
       }
+
+      /* Show hamburger */
+      .hamburger {
+        display: block;
+      }
     }
+
   </style>
 </head>
 <body>
 
+<!-- Hamburger menu for mobile -->
+<button class="hamburger" id="hamburger" aria-label="Toggle menu">
+  <div></div>
+  <div></div>
+  <div></div>
+</button>
+
 <!-- Sidebar -->
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
   <h2>Admin Panel</h2>
   <ul>
     <li><a href="index.php">📊 Dashboard</a></li>
@@ -145,7 +195,7 @@
 
 <!-- Main Content -->
 <div class="main-content">
-<h1>Welcome, <?= isset($_SESSION['admin_username']) ? htmlspecialchars($_SESSION['admin_username']) : 'Admin' ?>!</h1>
+  <h1>Welcome, <?= isset($_SESSION['admin_username']) ? htmlspecialchars($_SESSION['admin_username']) : 'Admin' ?>!</h1>
 
   <!-- Dashboard Cards -->
   <div class="cards-container">
@@ -165,6 +215,24 @@
     </div>
   </div>
 </div>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById('sidebar');
+
+  hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+
+  // Optional: close sidebar on clicking a sidebar link (mobile)
+  sidebar.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove('active');
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
