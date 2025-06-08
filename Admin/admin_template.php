@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     // Not logged in, redirect to login page
@@ -7,7 +9,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit();
 }
 
-// If logged in, continue loading the page
+// If logged in, continue loading the requested page
 $page = $_GET['page'] ?? 'dashboard.php';
 
 // Sanitize to avoid path traversal attacks
