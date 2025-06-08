@@ -1,9 +1,11 @@
 <?php
-// Check if admin is logged in
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+session_start();
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: login.php');
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
