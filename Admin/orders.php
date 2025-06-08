@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * { box-sizing: border-box; }
-
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #f4f6f8;
@@ -40,12 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
       padding: 20px 30px;
       margin-left: 270px;
     }
-
     h1 {
       color: #333;
       margin-bottom: 25px;
     }
-
     .orders-wrapper {
       background: #fff;
       border-radius: 12px;
@@ -53,29 +50,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
       padding: 20px;
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
       min-width: 900px;
     }
-
     th, td {
       padding: 14px 18px;
       text-align: left;
       border-bottom: 1px solid #eaeaea;
     }
-
     th {
       background-color: #2d3e50;
       color: #fff;
       font-weight: 600;
     }
-
     tr:hover {
       background-color: #f1f1f1;
     }
-
     .status {
       padding: 6px 12px;
       border-radius: 30px;
@@ -84,28 +76,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
       display: inline-block;
       text-transform: capitalize;
     }
-
     .status.pending { background-color: #ff9800; color: #fff; }
     .status.completed { background-color: #4caf50; color: #fff; }
     .status.cancelled { background-color: #f44336; color: #fff; }
-
     select {
       padding: 5px 8px;
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 14px;
     }
-
     @media (max-width: 768px) {
       body {
         margin-left: 0;
         padding: 10px;
       }
-
       .orders-wrapper {
         padding: 10px;
       }
-
       table {
         font-size: 14px;
       }
@@ -122,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
       <tr>
         <th>#Order ID</th>
         <th>Customer Name</th>
-        <th>Product</th>
+        <th>Ordered Items</th>
         <th>Quantity</th>
         <th>Payment Method</th>
         <th>Status</th>
@@ -142,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
           <tr id="order-<?= $row['id']; ?>">
             <td><?= $row['id']; ?></td>
             <td><?= htmlspecialchars($row['customer_name']); ?></td>
-            <td><?= htmlspecialchars($row['product']); ?></td>
+            <td><?= nl2br(htmlspecialchars($row['product'])); ?></td> <!-- This shows actual items ordered -->
             <td><?= (int)$row['quantity']; ?></td>
             <td><?= htmlspecialchars($row['payment_method']); ?></td>
             <td><span class="status <?= $statusClass; ?>" id="status-label-<?= $row['id']; ?>"><?= ucfirst($statusClass); ?></span></td>
