@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
             echo "Status updated";
         } else {
             http_response_code(500);
-            echo "Database error";
+            echo "Database error: " . mysqli_error($conn);
         }
     } else {
         http_response_code(400);
@@ -27,9 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Orders | Admin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { box-sizing: border-box; }
     body {
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
       <tr>
         <th>#Order ID</th>
         <th>Customer Name</th>
-        <th>Ordered Items</th>
+        <th>Product Ordered</th>
         <th>Quantity</th>
         <th>Payment Method</th>
         <th>Status</th>
@@ -119,7 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
     </thead>
     <tbody>
       <?php
-      $query = "SELECT * FROM orders ORDER BY order_date DESC";
+      // Query joining orders with products table
+      $query = "SELECT o.*, p.name AS product_name 
+                FROM orders o 
+                LEFT JOIN products p ON o.product_id = p.id 
+                ORDER BY o.order_date DESC";
       $result = mysqli_query($conn, $query);
 
       if (mysqli_num_rows($result) > 0):
@@ -129,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
           <tr id="order-<?= $row['id']; ?>">
             <td><?= $row['id']; ?></td>
             <td><?= htmlspecialchars($row['customer_name']); ?></td>
-            <td><?= nl2br(htmlspecialchars($row['product'])); ?></td> <!-- This shows actual items ordered -->
+            <td><?= htmlspecialchars($row['product_name'] ?? 'Unknown Product'); ?></td>
             <td><?= (int)$row['quantity']; ?></td>
             <td><?= htmlspecialchars($row['payment_method']); ?></td>
             <td><span class="status <?= $statusClass; ?>" id="status-label-<?= $row['id']; ?>"><?= ucfirst($statusClass); ?></span></td>
