@@ -1,26 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Panel</title>
-  <link rel="stylesheet" href="assets/styles.css" />
-</head>
-<body>
-  <div class="container">
-    <?php include 'sidebar.php'; ?>
+<?php
+session_start();
 
-    <div class="main-content">
-      <?php
-        if (isset($page) && file_exists($page)) {
-          include $page;
-        } else {
-          echo "<p>Page not found.</p>";
-        }
-      ?>
-    </div>
-  </div>
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    // Not logged in, redirect to login page
+    header('Location: Admin_login.php'); 
+    exit();
+}
 
-  <script src="assets/sidebar.js"></script>
-</body>
-</html>
+// If logged in, continue loading the page
+$page = $_GET['page'] ?? 'dashboard.php';
+
+// Sanitize to avoid path traversal attacks
+$allowed_pages = ['dashboard.php', 'other_page.php']; // add allowed pages here
+if (!in_array($page, $allowed_pages)) {
+    $page = 'dashboard.php';
+}
+
+include $page;
+?>
