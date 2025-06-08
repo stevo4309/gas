@@ -1,0 +1,65 @@
+[1mdiff --git a/Admin/Admin_login.php b/Admin/Admin_login.php[m
+[1mindex 94ce71b..8b99ac4 100644[m
+[1m--- a/Admin/Admin_login.php[m
+[1m+++ b/Admin/Admin_login.php[m
+[36m@@ -1,34 +1,36 @@[m
+ <?php[m
+ session_start();[m
+[31m-require_once '../db_connection.php'; // Update path if needed[m
+ [m
+[31m-$error = "";[m
+[32m+[m[32m// Assume you get $username and $password from POST[m
+[32m+[m[32mif ($_SERVER['REQUEST_METHOD'] === 'POST') {[m
+[32m+[m[32m    $username = $_POST['username'] ?? '';[m
+[32m+[m[32m    $password = $_POST['password'] ?? '';[m
+ [m
+[31m-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username']) && isset($_POST['password'])) {[m
+[31m-    $username = trim($_POST['username']);[m
+[31m-    $password = trim($_POST['password']);[m
+[32m+[m[32m    // Validate login (replace this with your actual login check)[m
+[32m+[m[32m    if ($username === 'admin' && $password === 'your_password_here') {[m
+[32m+[m[32m        // Set session to indicate logged in[m
+[32m+[m[32m        $_SESSION['admin_logged_in'] = true;[m
+[32m+[m[32m        $_SESSION['admin_username'] = $username;[m
+ [m
+[31m-    // Prepare statement to fetch user by username only[m
+[31m-    $stmt = $conn->prepare("SELECT * FROM admins WHERE username = ?");[m
+[31m-    $stmt->bind_param("s", $username);[m
+[31m-    $stmt->execute();[m
+[31m-    $result = $stmt->get_result();[m
+[31m-[m
+[31m-    if ($result && $result->num_rows === 1) {[m
+[31m-        $user = $result->fetch_assoc();[m
+[31m-[m
+[31m-        // Verify the password with password_verify()[m
+[31m-        if (password_verify($password, $user['password'])) {[m
+[31m-            // Password matches, set session[m
+[31m-            $_SESSION['admin_logged_in'] = true;[m
+[31m-            $_SESSION['admin_username'] = $username;[m
+[31m-            header("Location: dashboard.php");[m
+[31m-            exit();[m
+[31m-        } else {[m
+[31m-            $error = "Invalid username or password";[m
+[31m-        }[m
+[32m+[m[32m        // Redirect to admin index (dashboard loader)[m
+[32m+[m[32m        header("Location: index.php");[m
+[32m+[m[32m        exit();[m
+     } else {[m
+         $error = "Invalid username or password";[m
+     }[m
+ }[m
+ ?>[m
+[32m+[m
+[32m+[m[32m<!-- Your login form HTML below -->[m
+[32m+[m[32m<!DOCTYPE html>[m
+[32m+[m[32m<html>[m
+[32m+[m[32m<head><title>Admin Login</title></head>[m
+[32m+[m[32m<body>[m
+[32m+[m[32m    <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>[m
+[32m+[m[32m    <form method="POST" action="">[m
+[32m+[m[32m        <input type="text" name="username" placeholder="Username" required /><br/>[m
+[32m+[m[32m        <input type="password" name="password" placeholder="Password" required /><br/>[m
+[32m+[m[32m        <button type="submit">Login</button>[m
+[32m+[m[32m    </form>[m
+[32m+[m[32m</body>[m
+[32m+[m[32m</html>[m

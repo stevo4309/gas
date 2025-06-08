@@ -1,34 +1,47 @@
 <?php
 session_start();
-require_once '../db_connection.php'; // Update path if needed
+require_once '../db_connection.php'; // Ensure this path is correct
 
-$error = "";
+$error = '';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username']) && isset($_POST['password'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    // Prepare statement to fetch user by username only
     $stmt = $conn->prepare("SELECT * FROM admins WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result && $result->num_rows === 1) {
-        $user = $result->fetch_assoc();
+        $admin = $result->fetch_assoc();
 
-        // Verify the password with password_verify()
-        if (password_verify($password, $user['password'])) {
-            // Password matches, set session
+        // You can use password_verify() if passwords are hashed
+        if (password_verify($password, $admin['password'])) {
             $_SESSION['admin_logged_in'] = true;
-            $_SESSION['admin_username'] = $username;
-            header("Location: dashboard.php");
+            $_SESSION['admin_username'] = $admin['username'];
+            header('Location: dashboard.php'); // Adjust to your admin landing page
             exit();
         } else {
-            $error = "Invalid username or password";
+            $error = "Invalid password.";
         }
     } else {
-        $error = "Invalid username or password";
+        $error = "Admin user not found.";
     }
+
+    $stmt->close();
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head><title>Admin Login</title></head>
+<body>
+    <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <form method="POST" action="">
+        <input type="text" name="username" placeholder="Username" required /><br/>
+        <input type="password" name="password" placeholder="Password" required /><br/>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
