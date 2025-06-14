@@ -174,7 +174,7 @@ header {
 
     <div class="cards-container">
       <div class="card">
-        <img src="images/about/who-we-are.jpg" alt="Who We Are">
+        <img src="images/steve.jpeg" alt="Who We Are">
         <h3>Who We Are</h3>
         <p>Your reliable gas supplier for safe and efficient delivery.</p>
       </div>
