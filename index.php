@@ -55,10 +55,12 @@ header {
   font-size: 1.6em;
   letter-spacing: 1px;
   background-color: #ec0d0d;
-  color: white;
+  color: black;
+  -webkit-text-stroke: 1px white; /* solid white outline */
+  text-stroke: 1px white; /* for future-proofing in other browsers */
   padding: 6px 12px;
   border-radius: 8px;
-  gap: 10px;
+  gap: 10px;
 }
 .flame-icon {
   height: 28px;
@@ -97,20 +99,37 @@ header {
   .menu-icon {
     display: block;
     color: white;
+    z-index: 1001;
+    position: relative;
   }
+
   .nav-menu {
     flex-direction: column;
     position: absolute;
-    top: 60px;
-    right: 20px;
-    background: rgb(66, 36, 235);
-    width: 200px;
+    top: 100%;
+    right: 0;
+    background-color: #ec0d0d; /* match brand red */
+    width: 220px;
     display: none;
-    padding: 10px 0;
-    border-radius: 8px;
+    padding: 12px 0;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
   }
+
+  .nav-menu a {
+    padding: 12px 16px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+
   #menu-toggle:checked + .menu-icon + .nav-menu {
     display: flex;
+  }
+
+  /* Optional: prevent body scroll when menu is open */
+  #menu-toggle:checked ~ * {
+    overflow: hidden;
   }
 }
   </style>
