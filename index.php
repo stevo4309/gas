@@ -108,7 +108,7 @@ header {
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: #ec0d0d; /* match brand red */
+    background-color:rgb(13, 54, 236); /* match brand red */
     width: 220px;
     display: none;
     padding: 12px 0;
